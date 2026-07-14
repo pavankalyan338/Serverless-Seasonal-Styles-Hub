@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Shopping Cart</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/amazon-cognito-identity-js/dist/amazon-cognito-identity.min.js"></script>
+</head>
+<body>
+  <header>
+    <div class="navbar">
+      <div class="logo">Seasonal Styles ☁️</div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact</a>
+        <a href="cart.html" class="active">🛒 Cart</a>
+        <span id="userGreeting" style="margin-left:15px; font-weight:bold;"></span>
+        <a href="login.html" id="loginNavBtn" style="background: rgba(255,255,255,0.2)">Sign In</a>
+      </nav>
+    </div>
+  </header>
+  <main style="max-width: 600px; margin: 40px auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+    <h2>Your Shopping Cart Items</h2>
+    <div id="cartItemsList" style="margin:20px 0;"></div>
+    <hr>
+    <h3 style="margin-top:20px; text-align:right;">Total: <span id="cartTotal" style="color:#2e7d32;">₹0</span></h3>
+  </main>
+  <script src="script.js"></script>
+  <script>
+    const userEmail = localStorage.getItem("userEmail");
+    if (!userEmail) {
+      document.getElementById("cartItemsList").innerHTML = "<p>Please sign in to access your cloud cart.</p>";
+    } else {
+      loadCartItems(userEmail);
+    }
+  </script>
+</body>
+</html>

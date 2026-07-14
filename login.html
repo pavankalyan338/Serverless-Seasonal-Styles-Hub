@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account Management</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/amazon-cognito-identity-js/dist/amazon-cognito-identity.min.js"></script>
+  <style>
+    .auth-box { max-width: 400px; margin: 60px auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center; }
+    .auth-box input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 20px; outline: none; text-align: center; }
+    .btn { background: #ff69b4; color: white; border: none; padding: 12px; border-radius: 20px; width: 100%; cursor: pointer; font-weight: bold; margin-top: 10px; transition: 0.3s; }
+    .btn:hover { opacity: 0.9; }
+    
+    .toggle-link { margin-top: 20px; font-size: 0.95rem; color: #666; }
+    .toggle-link a { color: #ff69b4; text-decoration: none; font-weight: bold; cursor: pointer; transition: 0.2s; }
+    .toggle-link a:hover { color: #d63384; text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="navbar">
+      <div class="logo">Seasonal Styles ☁️</div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact</a>
+        <a href="cart.html">🛒 Cart</a>
+        <span id="userGreeting" style="margin-left:15px; font-weight:bold;"></span>
+        <a href="login.html" id="loginNavBtn" style="background: rgba(255,255,255,0.4)">Sign In</a>
+      </nav>
+    </div>
+  </header>
+  
+  <main>
+    <div class="auth-box" id="loginForm">
+      <h2>Welcome Back</h2>
+      <input type="email" id="loginEmail" placeholder="Email Address">
+      <input type="password" id="loginPassword" placeholder="Password">
+      <button class="btn" style="background:#d63384" onclick="signInUser()">Log In</button>
+      
+      <div class="toggle-link">
+        New user? <a onclick="toggleAuth('signup')">Sign up here</a>
+      </div>
+    </div>
+
+    <div class="auth-box" id="signupForm" style="display: none;">
+      <h2>Create Free Account</h2>
+      <input type="email" id="regEmail" placeholder="Enter Email">
+      <input type="password" id="regPassword" placeholder="Enter Password">
+      <button class="btn" onclick="signUpUser()">Sign Up</button>
+      
+      <div id="verificationArea" style="display:none; margin-top: 20px; border-top: 1px solid #eee; padding-top: 15px;">
+        <p style="color:blue; font-size:0.85rem;">Check your email for a code!</p>
+        <input type="text" id="verCode" placeholder="Verification Code">
+        <button class="btn" style="background:#28a745" onclick="verifyUserEmail()">Confirm Code</button>
+      </div>
+
+      <div class="toggle-link">
+        Already have an account? <a onclick="toggleAuth('login')">Log in here</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+  
+  <script>
+    function toggleAuth(formType) {
+      const loginForm = document.getElementById('loginForm');
+      const signupForm = document.getElementById('signupForm');
+      
+      if (formType === 'signup') {
+        loginForm.style.display = 'none';
+        signupForm.style.display = 'block';
+      } else if (formType === 'login') {
+        signupForm.style.display = 'none';
+        loginForm.style.display = 'block';
+      }
+    }
+  </script>
+</body>
+</html>
